@@ -10,6 +10,9 @@ namespace HTTPTest
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("starting server on port 8080");
+            HTTPServer server = new HTTPServer(8080);
+            server.Start();
         }
     }
 }

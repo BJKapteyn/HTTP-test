@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -34,7 +35,11 @@ namespace HTTPTest
 
             while(Running)
             {
-                TcpClient client = new TcpClient();
+                Console.WriteLine("Waiting for connection");
+
+                TcpClient client = listener.AcceptTcpClient();
+
+                Console.WriteLine("Client connected!");
 
                 HandleClient(client);
 
@@ -48,7 +53,16 @@ namespace HTTPTest
 
         private void HandleClient(TcpClient client)
         {
+            StreamReader reader = new StreamReader(client.GetStream());
 
+            string msg = "";
+
+            while (reader.Peek() != -1)
+            {
+                msg += reader.ReadLine() + "\n";
+            }
+
+            Console.WriteLine("Request: /n" + msg);
         }
     }
 }
