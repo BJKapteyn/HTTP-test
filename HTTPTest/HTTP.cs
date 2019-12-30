@@ -34,8 +34,21 @@ namespace HTTPTest
 
             while(Running)
             {
+                TcpClient client = new TcpClient();
 
+                HandleClient(client);
+
+                client.Close();
             }
+
+            Running = false;
+
+            listener.Stop();
+        }
+
+        private void HandleClient(TcpClient client)
+        {
+
         }
     }
 }
