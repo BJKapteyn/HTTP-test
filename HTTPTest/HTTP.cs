@@ -13,6 +13,11 @@ namespace HTTPTest
 {
     public class HTTPServer
     {
+        public const string MSG_DIR = "/root/msg/";
+        public const string WEB_DIR = "/root/web/";
+        public const string Name = "Brad's rad server";
+        public const string Version = "HTML/1.1";
+
         private bool Running = false;
 
         private TcpListener listener;
