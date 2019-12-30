@@ -14,7 +14,9 @@ namespace HTTPTest
 
         private Request(string type, string url, string host)
         {
-
+            type = Type;
+            url = URL;
+            host = Host;
         }
 
         public static Request GetRequest(string request)
@@ -23,9 +25,12 @@ namespace HTTPTest
                 {
                     return null;
                 }
-
+            //parse the request string and grab the type url and host
             string[] tokens = request.Split(' ');
-            return new Request("", "", "");
+            string type = tokens[0];
+            string url = tokens[1];
+            string host = tokens[4];
+            return new Request(type, url, host);
         }
     }
 }

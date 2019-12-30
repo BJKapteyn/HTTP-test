@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -62,7 +63,13 @@ namespace HTTPTest
                 msg += reader.ReadLine() + "\n";
             }
 
-            Console.WriteLine("Request: /n" + msg);
+            Debug.WriteLine("Request: \n" + msg);
+
+            Request request = Request.GetRequest(msg);
+
+            Response response = Response.From(request);
+            response.Post(client.GetStream());
+
         }
     }
 }
