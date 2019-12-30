@@ -19,7 +19,7 @@ namespace HTTPTest
             this.status = status;
             this.data = data;
         }
-
+        //left off here
         public static Response From(Request request)
         {
             if(request == null)
@@ -28,7 +28,15 @@ namespace HTTPTest
             }
             if(request.Type == "GET")
             {
-                return MakeBadRequest();
+                string file = Environment.CurrentDirectory + HTTPServer.WEB_DIR + request.URL;
+                if(File.Exists(file))
+                {
+
+                }
+            }
+            else
+            {
+                return MakeNotAllowedRequest();
             }
         }
 
