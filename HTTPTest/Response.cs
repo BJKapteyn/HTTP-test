@@ -29,9 +29,14 @@ namespace HTTPTest
             if(request.Type == "GET")
             {
                 string file = Environment.CurrentDirectory + HTTPServer.WEB_DIR + request.URL;
-                if(File.Exists(file))
+                FileInfo f = new FileInfo(file);
+                if(f.Exists && f.Extension.Contains("."))
                 {
 
+                }
+                else
+                {
+                    DirectoryInfo di = new DirectoryInfo
                 }
             }
             else
