@@ -65,7 +65,7 @@ namespace HTTPTest
 
             while (reader.Peek() != -1)
             {
-                msg += reader.ReadLine() + "\n";
+                msg += reader.ReadLine() + " ";
             }
 
             Debug.WriteLine("Request: \n" + msg);

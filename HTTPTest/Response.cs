@@ -28,6 +28,7 @@ namespace HTTPTest
             }
             if(request.Type == "GET")
             {
+                
                 string file = Environment.CurrentDirectory + HTTPServer.WEB_DIR + request.URL;
                 FileInfo f = new FileInfo(file);
                 if(f.Exists && f.Extension.Contains("."))
@@ -38,6 +39,10 @@ namespace HTTPTest
                 {
                     DirectoryInfo directoryInfo = new DirectoryInfo(f + "/");
                     FileInfo[] files = directoryInfo.GetFiles();
+                    if (!directoryInfo.Exists)
+                    {
+                        return MakeBadRequest();
+                    }
 
                     foreach (FileInfo fi in files)
                     {
