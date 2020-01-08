@@ -77,7 +77,7 @@ namespace HTTPTest
             Byte[] d = new Byte[fileStream.Length];
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
-            return new Response("200 OK", "html/text", d);
+            return new Response("200 OK", "text/html", d);
         }
 
         private static Response MakeNotAllowedRequest()
@@ -90,7 +90,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("405 Not allowed", "html/text", d);
+            return new Response("405 Not allowed", "text/html", d);
         }
         private static Response MakeNullRequest()
         {
@@ -102,7 +102,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("400 Bad Request", "html/text", d);
+            return new Response("400 Bad Request", "text/html", d);
         }
         private static Response MakeBadRequest()
         {
@@ -114,7 +114,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("404 Page not found", "html/text", d);
+            return new Response("404 Page not found", "text/html", d);
         }
 
         public void Post(NetworkStream stream)
