@@ -36,7 +36,19 @@ namespace HTTPTest
                 }
                 else
                 {
-                    DirectoryInfo di = new DirectoryInfo
+                    DirectoryInfo directoryInfo = new DirectoryInfo(f + "/");
+                    FileInfo[] files = directoryInfo.GetFiles();
+
+                    foreach (FileInfo fi in files)
+                    {
+                        string name = fi.Name;
+
+                        if (name.Contains("default.html") || name.Contains("default.htm") || name.Contains("index.htm") || name.Contains("index.html"))
+                        {
+                            f = fi;
+                        }
+
+                    }
                 }
             }
             else
