@@ -33,16 +33,16 @@ namespace HTTPTest
                 FileInfo f = new FileInfo(file);
                 if(f.Exists && f.Extension.Contains("."))
                 {
-
+                    return MakeFromFile(f);
                 }
                 else
                 {
                     DirectoryInfo directoryInfo = new DirectoryInfo(f + "/");
-                    FileInfo[] files = directoryInfo.GetFiles();
                     if (!directoryInfo.Exists)
                     {
                         return MakeBadRequest();
                     }
+                    FileInfo[] files = directoryInfo.GetFiles();
 
                     foreach (FileInfo fi in files)
                     {
@@ -77,7 +77,7 @@ namespace HTTPTest
             Byte[] d = new Byte[fileStream.Length];
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
-            return new Response("200 OK", "text/html", new Byte[0]);
+            return new Response("200 OK", "html/text", d);
         }
 
         private static Response MakeNotAllowedRequest()
@@ -90,7 +90,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("405 Not allowed", "text/html", new Byte[0]);
+            return new Response("405 Not allowed", "html/text", d);
         }
         private static Response MakeNullRequest()
         {
@@ -102,7 +102,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("400 Bad Request", "text/html", new Byte[0]);
+            return new Response("400 Bad Request", "html/text", d);
         }
         private static Response MakeBadRequest()
         {
@@ -114,7 +114,7 @@ namespace HTTPTest
             reader.Read(d, 0, (int)fileStream.Length);
             fileStream.Close();
 
-            return new Response("404 Page not found", "text/html", new Byte[0]);
+            return new Response("404 Page not found", "html/text", d);
         }
 
         public void Post(NetworkStream stream)

@@ -14,7 +14,7 @@ namespace HTTPTest
     public class HTTPServer
     {
         public const string MSG_DIR = "/root/msg/";
-        public const string WEB_DIR = "/root/web/";
+        public const string WEB_DIR = "/root/html/";
         public const string Name = "Brad's rad server";
         public const string Version = "HTML/1.1";
 
