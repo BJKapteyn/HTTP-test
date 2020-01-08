@@ -19,7 +19,7 @@ namespace HTTPTest
             this.status = status;
             this.data = data;
         }
-        //left off here
+        //return the different responses based on request
         public static Response From(Request request)
         {
             if(request == null)
@@ -47,14 +47,32 @@ namespace HTTPTest
                         {
                             f = fi;
                         }
-
+                        return MakeFromFile(fi);
                     }
+                }
+
+                if(!f.Exists)
+                {
+                    return MakeBadRequest();
                 }
             }
             else
             {
                 return MakeNotAllowedRequest();
             }
+
+            return MakeBadRequest();
+        }
+
+        private static Response MakeFromFile(FileInfo f)
+        {
+            
+            FileStream fileStream = f.OpenRead();
+            BinaryReader reader = new BinaryReader(fileStream);
+            Byte[] d = new Byte[fileStream.Length];
+            reader.Read(d, 0, (int)fileStream.Length);
+            fileStream.Close();
+            return new Response("200 OK", "text/html", new Byte[0]);
         }
 
         private static Response MakeNotAllowedRequest()
@@ -65,6 +83,7 @@ namespace HTTPTest
             BinaryReader reader = new BinaryReader(fileStream);
             Byte[] d = new Byte[fileStream.Length];
             reader.Read(d, 0, (int)fileStream.Length);
+            fileStream.Close();
 
             return new Response("405 Not allowed", "text/html", new Byte[0]);
         }
@@ -76,6 +95,7 @@ namespace HTTPTest
             BinaryReader reader = new BinaryReader(fileStream);
             Byte[] d = new Byte[fileStream.Length];
             reader.Read(d, 0, (int)fileStream.Length);
+            fileStream.Close();
 
             return new Response("400 Bad Request", "text/html", new Byte[0]);
         }
@@ -87,6 +107,7 @@ namespace HTTPTest
             BinaryReader reader = new BinaryReader(fileStream);
             Byte[] d = new Byte[fileStream.Length];
             reader.Read(d, 0, (int)fileStream.Length);
+            fileStream.Close();
 
             return new Response("404 Page not found", "text/html", new Byte[0]);
         }
